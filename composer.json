@@ -1,0 +1,44 @@
+{
+    "name": "jacker/dpc",
+    "description": "Codebase for DPC workshop",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Jon Acker",
+            "email": "jon.acker@yoyo.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "ext-iconv": "*",
+        "symfony/console": "^4.0",
+        "symfony/flex": "^1.0",
+        "symfony/framework-bundle": "^4.0",
+        "symfony/lts": "^4@dev",
+        "symfony/yaml": "^4.0",
+        "doctrine/doctrine-bundle": "^1.8",
+        "symfony/http-kernel": "^4.0",
+        "sensio/framework-extra-bundle": "^5.1",
+        "doctrine/orm": "^2.6",
+        "symfony/web-server-bundle": "^4.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "require-dev": {
+        "behat/behat": "^3.4",
+        "phpunit/phpunit": "^7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "src/Application/",
+            "DeliverTo\\": "src/DeliverTo"
+        }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
+        }
+    }
+}
