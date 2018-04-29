@@ -21,4 +21,13 @@ class PickupTime
 
         return $time;
     }
+
+    public function add(\DateInterval $time): \DateTime
+    {
+        return $this->dateTime->add($time);
+    }
+
+    public function isEarlierThan(\DateTime $dateTime) {
+        return $this->dateTime < $dateTime;
+    }
 }

@@ -21,4 +21,12 @@ class Courier
         $deliverTo->registerCourier($this);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

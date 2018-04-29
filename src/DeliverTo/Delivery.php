@@ -44,10 +44,15 @@ class Delivery
     }
 
     /**
-     * @return mixed
+     * @return PickupTime
      */
     public function getPickupTime(): PickupTime
     {
         return $this->pickupTime;
+    }
+
+    public function getDropoffAddress()
+    {
+        return $this->dropoffAddress;
     }
 }
