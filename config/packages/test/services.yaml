@@ -1,0 +1,3 @@
+services:
+  google.map:
+    class: InMemoryMap
