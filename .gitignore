@@ -14,3 +14,7 @@
 /phpunit.xml
 ###< phpunit/phpunit ###
 /bin/
+
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###

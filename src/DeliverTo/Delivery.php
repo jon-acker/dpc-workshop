@@ -2,6 +2,7 @@
 
 namespace DeliverTo;
 
+use DateInterval;
 use DateTime;
 
 class Delivery
@@ -58,8 +59,25 @@ class Delivery
         return $this->toAddress;
     }
 
-    public function calculateTransitTimeUsing(Map $map)
+    public function calculateTransitTimeUsing(Map $map): int
     {
         return ($map->calculateDistanceBetween($this->fromAddress, $this->toAddress) / 20) * 60;
+    }
+
+    /**
+     * @param Map $map
+     * @return DateTime
+     * @throws \Exception
+     */
+    public function calculateDropoffTimeUsing(Map $map)
+    {
+        $deliveryTime = $this->calculateTransitTimeUsing($map);
+
+        return $this->pickupTime->add(new DateInterval('PT'.$deliveryTime.'M'));
+    }
+
+    public function hasPickupBefore(DateTime $eta)
+    {
+        return $eta < $this->pickupTime;
     }
 }

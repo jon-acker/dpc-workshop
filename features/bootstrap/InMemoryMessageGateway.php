@@ -1,4 +1,8 @@
 <?php
+
+use DeliverTo\Message;
+use DeliverTo\MessageGateway;
+
 class InMemoryMessageGateway implements MessageGateway
 {
 

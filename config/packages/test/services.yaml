@@ -1,3 +1,13 @@
 services:
-  google.map:
-    class: InMemoryMap
+
+    DeliverTo\System:
+      arguments: ['@google.map', '@delivery_to.schedule', '@deliver_to.message_gateway']
+
+    delivery_to.schedule:
+      class: InMemorySchedule
+
+    deliver_to.message_gateway:
+      class: InMemoryMessageGateway
+
+    google.map:
+        class: InMemoryMap

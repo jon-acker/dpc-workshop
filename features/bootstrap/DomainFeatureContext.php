@@ -6,12 +6,14 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use DeliverTo\Courier;
 use DeliverTo\Customer;
+use DeliverTo\Delivery;
+use DeliverTo\Message;
 use PHPUnit\Framework\Assert;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context
+class DomainFeatureContext implements Context
 {
     /**
      * @var InMemoryMap
@@ -24,7 +26,7 @@ class FeatureContext implements Context
     private $system;
 
     /**
-     * @var \DeliverTo\InMemorySchedule
+     * @var InMemorySchedule
      */
     private $schedule;
 
@@ -49,7 +51,7 @@ class FeatureContext implements Context
     public function __construct()
     {
         $this->map = new InMemoryMap();
-        $this->schedule = new \DeliverTo\InMemorySchedule();
+        $this->schedule = new InMemorySchedule();
         $this->messageGateway = new InMemoryMessageGateway();
 
         $this->system = new DeliverTo\System($this->schedule, $this->map, $this->messageGateway);
@@ -172,6 +174,6 @@ class FeatureContext implements Context
      */
     public function jamesShouldReceivedAConfirmationOfHisBooking(Customer $james)
     {
-        Assert::assertTrue($this->messageGateway->messageWasSent(Message::to($james)));
+        Assert::assertTrue($this->messageGateway->messageWasSent(Message::to($james)), 'Expected Customer to receive confirmation!');
     }
 }

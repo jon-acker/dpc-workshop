@@ -4,6 +4,7 @@ namespace DeliverTo;
 
 use DateInterval;
 use InMemorySchedule;
+use RuntimeException;
 
 class System
 {
@@ -56,28 +57,25 @@ class System
         $this->schedule->add($nick, $delivery);
     }
 
-    public function book(Delivery $deliveryRequest, Customer $customer)
+    /**
+     * @param Delivery $requestedDelivery
+     * @param Customer $customer
+     * @throws \Exception
+     */
+    public function book(Delivery $requestedDelivery, Customer $customer)
     {
         foreach ($this->couriers as $courier) {
-            $delivery =$this->schedule->getLastDeliveryFor($courier);
+            $estimatedPickupTime = $this->schedule
+                ->getLastDeliveryFor($courier)
+                ->calculateDropoffTimeUsing($this->map);
 
-            $deliveryTime = $delivery->calculateTransitTimeUsing($this->map);
-
-            $eta = $delivery->getPickupTime()->add(new DateInterval('PT'.$deliveryTime.'M'));
-
-            $timeToPickup = ($this->map->calculateDistanceBetween(
-                $delivery->getToAddress(),
-                $deliveryRequest->getFromAddress()) / Courier::SPEED) * 60;
-
-            $eta = $eta->add(new DateInterval('PT'.$timeToPickup.'M'));
-
-            if ($eta <= $deliveryRequest->getPickupTime()) {
-                $this->schedule->add($courier, $deliveryRequest);
+            if ($requestedDelivery->hasPickupBefore($estimatedPickupTime)) {
+                $this->schedule->add($courier, $requestedDelivery);
                 $this->messageGateway->send(Message::to($customer));
                 return;
             }
         }
 
-        throw new \RuntimeException();
+        throw new RuntimeException();
     }
 }

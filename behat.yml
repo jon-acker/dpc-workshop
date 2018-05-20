@@ -1,0 +1,12 @@
+default:
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                class: Application\Kernel
+    suites:
+        e2e:
+            contexts:
+                - EndToEndFeatureContext
+        domain:
+            contexts:
+                - DomainFeatureContext

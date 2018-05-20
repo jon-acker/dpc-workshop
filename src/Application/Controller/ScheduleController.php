@@ -11,8 +11,8 @@ namespace Application\Controller;
 
 use DateTime;
 use DeliverTo\Customer;
+use DeliverTo\Delivery;
 use DeliverTo\System;
-use Delivery;
 
 class ScheduleController
 {
