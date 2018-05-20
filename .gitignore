@@ -13,3 +13,5 @@
 ###> phpunit/phpunit ###
 /phpunit.xml
 ###< phpunit/phpunit ###
+
+/bin/
