@@ -10,4 +10,4 @@ services:
       class: InMemoryMessageGateway
 
     google.map:
-        class: InMemoryMap
+        class: InFileMap

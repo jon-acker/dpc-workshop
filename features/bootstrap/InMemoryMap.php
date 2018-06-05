@@ -1,6 +1,6 @@
 <?php
 
-namespace DeliverTo;
+use DeliverTo\Map;
 
 class InMemoryMap implements Map
 {

@@ -6,7 +6,8 @@ default:
     suites:
         e2e:
             contexts:
-                - EndToEndFeatureContext
+                - EndToEndFeatureContext:
+                    kernel: '@kernel'
         domain:
             contexts:
                 - DomainFeatureContext
