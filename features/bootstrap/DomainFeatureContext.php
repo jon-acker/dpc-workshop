@@ -9,7 +9,7 @@ use PHPUnit\Framework\Assert;
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context
+class DomainFeatureContext implements Context
 {
     /**
      * @var \DeliverTo\InMemoryMap
