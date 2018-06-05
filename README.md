@@ -36,10 +36,10 @@ Distance from A1 to A2 is 20 miles (an hours journey)
 | Courier can make it  & is scheduled     | 
 |-----------------------------------------| 
 | James books a delivery for 13:00,       |  
-| the courier last dropoff is at 12:00 -  |
+| the couriers last dropoff is at 12:00 - |
 | and 20 km from James`address            |
 | therefore =>                            |
-| He makes it on time - and is schedule   |
+| He makes it on time - and is scheduled  |
 | for 13:00 picking up from James         |
 
 
@@ -55,7 +55,7 @@ Distance from A1 to A2 is 20 miles (an hours journey)
 Given courier Nick is 10 miles away and available from 13:30
 When James books the delivery from A1 to A2 for 13:00
 Then James should receive confirmation of a 14:00 parcel pickup 
-And the courier Nick should be dispatched to A1 for 14:00
+And the courier Nick should be schedule to delivery from A1 for 14:00
 
 Advanced Examples
 =================
