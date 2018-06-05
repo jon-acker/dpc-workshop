@@ -59,9 +59,9 @@ class Delivery
         return $this->toAddress;
     }
 
-    public function calculateTransitTimeUsing(Map $map): int
+    public function calculateTransitTimeUsing(): CalculatingTransitTime
     {
-        return ($map->calculateDistanceBetween($this->fromAddress, $this->toAddress) / 20) * 60;
+        return new CalculatingTransitTime($this->fromAddress, $this->toAddress);
     }
 
     /**
@@ -71,13 +71,18 @@ class Delivery
      */
     public function calculateDropoffTimeUsing(Map $map)
     {
-        $deliveryTime = $this->calculateTransitTimeUsing($map);
+        $deliveryTime = (new CalculatingTransitTime($this->fromAddress, $this->toAddress))->using($map);
 
-        return $this->pickupTime->add(new DateInterval('PT'.$deliveryTime.'M'));
+        return $this->pickupTime->add($deliveryTime);
     }
 
     public function hasPickupBefore(DateTime $eta)
     {
         return $eta < $this->pickupTime;
+    }
+
+    public function calculateTransitTimeTo(Delivery $requestedDelivery): CalculatingTransitTime
+    {
+        return new CalculatingTransitTime($this->toAddress, $requestedDelivery->fromAddress);
     }
 }

@@ -19,6 +19,9 @@ class InMemoryMap implements Map
 
     public function calculateDistanceBetween(string $address1, string $address2): float
     {
+        if ($address1 === $address2) {
+            return 0.0;
+        }
         return (float)$this->distances[md5($address1.'.'.$address2)];
     }
 }

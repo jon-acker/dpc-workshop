@@ -54,7 +54,11 @@ class DomainFeatureContext implements Context
         $this->schedule = new InMemorySchedule();
         $this->messageGateway = new InMemoryMessageGateway();
 
-        $this->system = new DeliverTo\System($this->schedule, $this->map, $this->messageGateway);
+        $this->system = new DeliverTo\System(
+            $this->schedule,
+            $this->map,
+            $this->messageGateway
+        );
     }
 
     /**
@@ -115,6 +119,7 @@ class DomainFeatureContext implements Context
 
     /**
      * @When :customer tries to book a delivery from :pickupAddress to :dropoffAddress for :hours::minutes
+     * @throws Exception
      */
     public function jamesTriesToBookADeliveryFromToFor(Customer $customer, string $pickupAddress, string $dropoffAddress, $hours, $minutes)
     {
@@ -150,7 +155,8 @@ class DomainFeatureContext implements Context
      */
     public function jamesShouldBeToldThatNoCouriersAreAvailable()
     {
-        Assert::assertInstanceOf(RuntimeException::class, $this->caughtException);
+        Assert::assertInstanceOf(RuntimeException::class, $this->caughtException,
+            'Expected booking to fail - but it succeeded!');
     }
 
     /**

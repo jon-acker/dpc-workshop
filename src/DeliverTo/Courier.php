@@ -15,5 +15,6 @@ class Courier
         $courier = new static();
         $courier->name  = $name;
         return $courier;
-    }    
+    }
+
 }

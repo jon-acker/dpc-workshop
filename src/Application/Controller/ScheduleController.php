@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jon
- * Date: 14/05/2018
- * Time: 13:30
- */
-
 namespace Application\Controller;
 
 
@@ -13,6 +6,7 @@ use DateTime;
 use DeliverTo\Customer;
 use DeliverTo\Delivery;
 use DeliverTo\System;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class ScheduleController
 {
@@ -26,6 +20,9 @@ class ScheduleController
         $this->deliverTo = $deliverTo;
     }
 
+    /**
+     * @Route("/book")
+     */
     public function scheduleAction(Customer $customer, string $pickupAddress, string $dropoffAddress)
     {
         $delivery = Delivery::from($pickupAddress)

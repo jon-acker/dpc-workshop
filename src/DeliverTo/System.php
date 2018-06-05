@@ -41,7 +41,7 @@ class System
         $this->messageGateway = $messageGateway;
     }
 
-    public function registerCourier(Courier $courier )
+    public function registerCourier(Courier $courier)
     {
         $this->couriers[] = $courier;
     }
@@ -64,16 +64,19 @@ class System
      */
     public function book(Delivery $requestedDelivery, Customer $customer)
     {
-        foreach ($this->couriers as $courier) {
-            $estimatedPickupTime = $this->schedule
-                ->getLastDeliveryFor($courier)
-                ->calculateDropoffTimeUsing($this->map);
+        $lastDelivery = $this->schedule->getLastDeliveryFor($this->couriers[0]);
 
-            if ($requestedDelivery->hasPickupBefore($estimatedPickupTime)) {
-                $this->schedule->add($courier, $requestedDelivery);
-                $this->messageGateway->send(Message::to($customer));
-                return;
-            }
+        $estimatedPickupTime = $lastDelivery
+            ->calculateDropoffTimeUsing($this->map)
+            ->add($lastDelivery
+                ->calculateTransitTimeTo($requestedDelivery)
+                ->using($this->map)
+            );
+
+        if ($requestedDelivery->hasPickupBefore($estimatedPickupTime)) {
+            $this->schedule->add($this->couriers[0], $requestedDelivery);
+            $this->messageGateway->send(Message::to($customer));
+            return;
         }
 
         throw new RuntimeException();
