@@ -14,9 +14,10 @@ use Symfony\Component\HttpKernel\Kernel;
 class EndToEndFeatureContext implements Context
 {
     /**
-     * @var InMemoryMap
+     * @var InFileMap
      */
     private $map;
+
     /**
      * @var Kernel
      */
@@ -28,11 +29,13 @@ class EndToEndFeatureContext implements Context
      * Every scenario gets its own context instance.
      * You can also pass arbitrary arguments to the
      * context constructor through behat.yml.
+     * @param Kernel $kernel
+     * @param InFileMap $map
      */
-    public function __construct(Kernel $kernel)
+    public function __construct(Kernel $kernel, InFileMap $map)
     {
-        $this->map = new InMemoryMap();
         $this->kernel = $kernel;
+        $this->map = $map;
     }
 
     /**
@@ -51,10 +54,13 @@ class EndToEndFeatureContext implements Context
         $this->map->setDistance($address1, $address2, $distance);
     }
 
+    /**
+     * @When James books a delivery
+     */
     public function customerBooksADelivery()
     {
-        $json = "{}";
-        $request = Request::create('/schedule', Request::METHOD_POST, [], [], [], [], json_encode($json));
+        $payload = '{ "customer": "James" }';
+        $request = Request::create('/book', Request::METHOD_POST, [], [], [], [], $payload);
         $response = $this->kernel->handle($request);
     }
 }

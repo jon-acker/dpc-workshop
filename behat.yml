@@ -8,6 +8,7 @@ default:
             contexts:
                 - EndToEndFeatureContext:
                     kernel: '@kernel'
+                    map: '@google.map'
         domain:
             contexts:
                 - DomainFeatureContext

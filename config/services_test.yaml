@@ -11,3 +11,4 @@ services:
 
     google.map:
         class: InFileMap
+        public: true

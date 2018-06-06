@@ -32,6 +32,6 @@ class DefaultController
 
         $this->entityManager->flush();
 
-        return new JsonResponse([1,2,3]);
+        return new JsonResponse([]);
     }
 }
