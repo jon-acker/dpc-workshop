@@ -1,12 +1,22 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: jon
+ * Date: 07/06/2018
+ * Time: 11:29
+ */
+
 namespace DeliverTo;
 
 
 class System
 {
-    public function __construct()
+
+    /**
+     * System constructor.
+     * @param InMemoryMap $map
+     */
+    public function __construct($map)
     {
-
     }
-
 }

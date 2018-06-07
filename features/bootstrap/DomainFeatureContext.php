@@ -26,6 +26,7 @@ class DomainFeatureContext implements Context
     public function __construct()
     {
         $this->map = new InMemoryMap();
+        $this->deliverToSystem = new DeliverTo\System($this->map);
     }
 
     /**
