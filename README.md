@@ -3,18 +3,20 @@ DeliverTo - Courier System
 
 DeliverTo is a Service that picks up an item for delivery from a given address and delivers it to another address.
 
-Customers book a delivery with DeliverTo giving the time they want the item to be picked up, pickup address and destination.
+We are aiming to build a booking API for this service (although we will start by creating purely the domain model)
+
+Customers book a delivery with DeliverTo giving the time they want the item to be picked up, *pickup address* and *dropoff address*.
 
 DeliverTo takes the bookings for deliveries and schedules its couriers according to business rules.
 
-DeliverTo tries to schedule a courier and sends a message back to the Customer with a confirmation or rejection.
+DeliverTo tries to schedule a courier and sends a message back to the customer with a confirmation or rejection.
 
 The system schedules the courier with details of what address to pick up from, the time pickup was booked for and the address to delivery it to
 (The mechanism for making the courier of the updates to their schedule is beyond the scope of this exercise)
 
-If more than one courier can make it to the pickup address on time - the courier closest to the pickup is be scheduled to pickup.
+If more than one courier can make it to the pickup address on time - the courier closest to the pickup address is scheduled to pickup.
 
-If not couriers can make it to the pickup address on time - the customer is told that booking cannot be taken.
+If couriers cannot make it to the pickup address on time - the customer is told that booking cannot be taken.
 
 Couriers go about 20 kilometers an hour
 
@@ -52,8 +54,10 @@ Distance from A1 to A2 is 20 miles (an hours journey)
 | He can't make it - and is not scheduled |
 | James is told booking cannot be taken   |
 
-Given courier Nick is 10 miles away and available from 13:30
-When James books the delivery from A1 to A2 for 13:00
+A Gherkin Example
+=======
+Given courier Nick is in Utrech 10 miles from Amstedam away and available from 13:30
+When James books the delivery from Amsterdam to Den Haag for 13:00
 Then James should receive confirmation of a 14:00 parcel pickup 
 And the courier Nick should be schedule to delivery from A1 for 14:00
 
