@@ -1,15 +1,16 @@
 services:
 
     DeliverTo\System:
-      arguments: ['@google.map', '@delivery_to.schedule', '@deliver_to.message_gateway']
+      arguments: ['@google.map', '@deliver_to.schedule']
 
-    delivery_to.schedule:
-      class: InMemorySchedule
+    deliver_to.schedule:
+      class: InFileSchedule
+      public: true
 
     deliver_to.message_gateway:
       class: InMemoryMessageGateway
 
     google.map:
-        class: InFileMap
-        public: true
+      class: InFileMap
+      public: true
         

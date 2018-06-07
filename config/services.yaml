@@ -30,3 +30,6 @@ services:
 
     google.map:
       class: Application\GoogleMap
+
+    deliver_to.schedule:
+      class: DeliverTo\PersistedSchedule

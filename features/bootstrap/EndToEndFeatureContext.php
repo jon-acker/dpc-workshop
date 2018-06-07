@@ -23,6 +23,10 @@ class EndToEndFeatureContext implements Context
      * @var Kernel
      */
     private $kernel;
+    /**
+     * @var InFileSchedule
+     */
+    private $schedule;
 
     /**
      * Initializes context.
@@ -33,10 +37,11 @@ class EndToEndFeatureContext implements Context
      * @param Kernel $kernel
      * @param InFileMap $map
      */
-    public function __construct(Kernel $kernel, InFileMap $map)
+    public function __construct(Kernel $kernel, InFileMap $map, InFileSchedule $schedule)
     {
         $this->kernel = $kernel;
         $this->map = $map;
+        $this->schedule = $schedule;
     }
 
     /**
@@ -63,5 +68,6 @@ class EndToEndFeatureContext implements Context
         $payload = '{ "customer": "James" }';
         $request = Request::create('/book', Request::METHOD_POST, [], [], [], [], $payload);
         $response = $this->kernel->handle($request);
+
     }
 }

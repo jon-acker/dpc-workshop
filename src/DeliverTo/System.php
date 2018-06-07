@@ -16,7 +16,11 @@ class System
      * System constructor.
      * @param InMemoryMap $map
      */
-    public function __construct($map)
+    public function __construct(Map $map, Schedule $schedule)
+    {
+    }
+
+    public function book($delivery)
     {
     }
 }

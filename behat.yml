@@ -9,6 +9,7 @@ default:
                 - EndToEndFeatureContext:
                     kernel: '@kernel'
                     map: '@google.map'
+                    schedule: '@deliver_to.schedule'
         domain:
             contexts:
                 - DomainFeatureContext
