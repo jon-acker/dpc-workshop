@@ -54,15 +54,20 @@ Distance from A1 to A2 is 20 miles (an hours journey)
 | He can't make it - and is not scheduled |
 | James is told booking cannot be taken   |
 
-A Gherkin Example
+An Example using Given/When/Then
 =======
+
+```gherkin
 Given courier Nick is in Utrech 10 miles from Amstedam away and available from 13:30
 When James books the delivery from Amsterdam to Den Haag for 13:00
 Then James should receive confirmation of a 14:00 parcel pickup 
 And the courier Nick should be schedule to delivery from A1 for 14:00
+```
 
 Advanced Examples
 =================
+
+```gherkin
 Given customer James has booked a delivery at 14:00 from A1 to A2
 And the distance from A1 to A2 is 20 miles
 When customer Brad books a delivery from B1 to B2 at 14:00
